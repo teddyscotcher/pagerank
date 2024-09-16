@@ -15,7 +15,7 @@ def create_graph(nnodes, avgnedges):
     if nnodes < avgnedges:
         return None
     #Using the Watts-Strogatz model, which may be not the best idea as although it does simulate small-worldedness, it more simulates social networks rather than the internet.
-    ws = nx.watts_strogatz_graph(nnodes,avg_edges,0.5)
+    ws = nx.watts_strogatz_graph(nnodes,avgnedges,0.5)
     #Convert to directed graph (with each undirected edge converted to 2 directed edges), then removing one of each of these directed edge pairs.
     ed = ws.edges()
     g = ws.to_directed()
@@ -78,7 +78,7 @@ node_slider = Slider(
     label='Number of nodes',
     valmin=10,
     valmax=200,
-    valinit=num_nodes,
+    valinit=10,
     valstep=1
 )
 axedge = fig.add_axes([0.35, 0.1, 0.5, 0.01])
@@ -87,7 +87,7 @@ edge_slider = Slider(
     label='Avg. edges',
     valmin=1,
     valmax=50,
-    valinit=avg_edges,
+    valinit=10,
     valstep=1
 )
 brefresh.on_clicked(load_new_example)
